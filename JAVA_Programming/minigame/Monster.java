@@ -1,5 +1,6 @@
 import java.util.*; 
 
+
 class Monster {
 	int x, y; 		//몬스터의 x, y좌표를 저장할 변수 선언
 	int random0to3; //난수를 저장할 변수 선언
