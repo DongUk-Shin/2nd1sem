@@ -5,7 +5,7 @@ import javax.swing.Timer;
 
 public class SnowAnimation extends JFrame {
 
-    private static final int WIDTH = 800;
+    private static final int WIDTH = 600;
     private static final int HEIGHT = 600;
     private static final int MAX_SNOW = 100;
     private static final int DELAY = 20;
@@ -15,7 +15,7 @@ public class SnowAnimation extends JFrame {
     private JButton removeButton;
     private int snowCount = 10;
     private ArrayList<Snowflake> snowflakes = new ArrayList<>();
-    private Image snowImage;
+    private Image backgroundImage;
 
     public SnowAnimation() {
         setTitle("Snow Animation");
@@ -24,8 +24,10 @@ public class SnowAnimation extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel buttonPanel = new JPanel();
-        ImageIcon snowIcon = new ImageIcon("snow.png");
-        snowImage = snowIcon.getImage();
+        
+        ImageIcon background1 = new ImageIcon("background.png");
+        backgroundImage = background1.getImage();
+        
         
         panel = new MyPanel();
         add(panel);
@@ -73,15 +75,21 @@ public class SnowAnimation extends JFrame {
     }
 
     private class MyPanel extends JPanel {
+    	
         public MyPanel() {
             setPreferredSize(new Dimension(WIDTH, HEIGHT));
-            setBackground(new Color(100, 200, 250));
         }
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
+            g.drawImage(backgroundImage, 0, 0, null);
+            
+            g.setColor(Color.WHITE);
             for (Snowflake snowflake : snowflakes) {
-                g.drawImage(snowImage, snowflake.getX(), snowflake.getY(), null);
+                int size = 10;  
+                int x = snowflake.getX();
+                int y = snowflake.getY();
+                g.fillOval(x, y, size, size);  
             }
         }
     }
