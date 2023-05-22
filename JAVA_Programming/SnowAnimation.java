@@ -24,11 +24,8 @@ public class SnowAnimation extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel buttonPanel = new JPanel();
-        
         ImageIcon background1 = new ImageIcon("background.png");
         backgroundImage = background1.getImage();
-        
-        
         panel = new MyPanel();
         add(panel);
 
@@ -59,7 +56,6 @@ public class SnowAnimation extends JFrame {
         timer.start();
         
         createSnowflakes();
-        
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -113,6 +109,9 @@ public class SnowAnimation extends JFrame {
             x += xspeed;
             if (y > HEIGHT) {
                 y = 0;
+            }
+            if (x > HEIGHT) {
+                x = 0;
             }
         }
         public int getX() {
