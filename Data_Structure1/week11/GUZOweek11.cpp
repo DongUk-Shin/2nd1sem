@@ -1,5 +1,5 @@
 //스택 두개로 큐 구현
-//피보나치 수열 출력
+//피보나치 수열 출력 
 
 #include <stdio.h>
 #include <stdlib.h>
