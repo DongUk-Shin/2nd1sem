@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #define MAX_TERMS 100
-
+ 
 typedef struct {
     int coef;
     int expo;
@@ -15,11 +15,11 @@ typedef struct {
 poly input_poly() {
     int n_terms;
     poly p = {0, {{0, 0}}};
-    printf("Ç×ÀÇ °³¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("í•­ì˜ ê°œìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”: ");
     scanf("%d", &n_terms);
 
     p.n_terms = n_terms;
-    printf("Ç× ÀÇ °è¼ö¿Í Â÷¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä: \n");
+    printf("í•­ ì˜ ê³„ìˆ˜ì™€ ì°¨ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”: \n");
     for (int i = 0; i < n_terms; i++) {
         scanf("%d %d", &p.terms[i].coef, &p.terms[i].expo);
     }
@@ -124,10 +124,10 @@ poly sub_poly(poly p1, poly p2) {
 int main() {
     poly p1, p2, p3;
 
-    printf("Ã¹¹øÂ° ´ÙÇ×½Ä ÀÔ·Â : \n");
+    printf("ì²«ë²ˆì§¸ ë‹¤í•­ì‹ ì…ë ¥ : \n");
     p1 = input_poly();
 
-    printf("µÎ¹øÂ° ´ÙÇ×½Ä ÀÔ·Â : \n");
+    printf("ë‘ë²ˆì§¸ ë‹¤í•­ì‹ ì…ë ¥ : \n");
     p2 = input_poly();
 
     p3 = sub_poly(p1, p2);
