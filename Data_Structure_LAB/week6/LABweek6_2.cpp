@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h> 
 #include <stdlib.h>
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_SIZE 100
@@ -58,7 +58,7 @@ int paren_test(char exp[]) {
             else 
                 pop(&s);
         }
-        else { //°ø¹éÀÏ½Ã ¾Æ¹«°Íµµ x
+        else { //Â°Ã¸Â¹Ã©Ã€ÃÂ½Ãƒ Â¾Ã†Â¹Â«Â°ÃÂµÂµ x
         }
     }
     if (!is_empty(s))
