@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> 
 #include <ctype.h>
 #include <math.h>
 #define MAX_SIZE 100
