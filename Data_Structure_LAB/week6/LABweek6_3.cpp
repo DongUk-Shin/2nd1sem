@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h> 
 #include <stdlib.h>
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_SIZE 100
@@ -61,7 +61,7 @@ int paren_num(char exp[]) {
                 left_paren_pos = pop(&s);
                 printf("%d ", left_paren_pos);
             }
-            else {  //±×·¸Áö ¾ÊÀ¸¸é pass
+            else {  //Â±Ã—Â·Â¸ÃÃ¶ Â¾ÃŠÃ€Â¸Â¸Ã© pass
             }
         }
         i++;
