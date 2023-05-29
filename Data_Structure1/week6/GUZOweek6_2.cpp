@@ -1,33 +1,33 @@
 #include<stdio.h>
 #include<stdlib.h>
 #define MAX_STACK_SIZE 100
-typedef int element;
+typedef int element; 
 element stack[MAX_STACK_SIZE];
 int top = -1;
 
-int is_empty() { //°ø¹é °ËÃâ
+int is_empty() { //ê³µë°± ê²€ì¶œ
     return (top == -1); 
 }
-int is_full() { //Æ÷È­ °ËÃâ
+int is_full() { //í¬í™” ê²€ì¶œ
     return (top == (MAX_STACK_SIZE - 1)); 
 }
-void push(element item) {  //»ğÀÔ
+void push(element item) {  //ì‚½ì…
     if (is_full()) {
-        fprintf(stderr, "½ºÅÃ Æ÷È­ ¿¡·¯\n");
+        fprintf(stderr, "ìŠ¤íƒ í¬í™” ì—ëŸ¬\n");
         return;
     }
     else stack[++top] = item;
 }
-element pop() { //»èÁ¦
+element pop() { //ì‚­ì œ
     if (is_empty()) {
-        fprintf(stderr, "½ºÅÃ °ø¹é ¿¡·¯\n");
+        fprintf(stderr, "ìŠ¤íƒ ê³µë°± ì—ëŸ¬\n");
         exit(1);
     }
     else return stack[top--];
 }
-element peek() { //top °üÂû
+element peek() { //top ê´€ì°°
     if (is_empty()) {
-        fprintf(stderr, "½ºÅÃ °ø¹é ¿¡·¯\n");
+        fprintf(stderr, "ìŠ¤íƒ ê³µë°± ì—ëŸ¬\n");
         exit(1);
     }
     else return stack[top];
@@ -36,18 +36,18 @@ element peek() { //top °üÂû
 void compress(char* string) {   
     int count = 1;
     for (int i = 0; string[i] != '\0'; i++) {
-        if (string[i] == string[i+1]) { //ÇöÀç ¹®ÀÚ¿Í ´ÙÀ½ ¹®ÀÚ¸¦ ºñ±³
-            count++;   //°°´Ù¸é count Áõ°¡
-        } else {       //ÇöÀç ¹®ÀÚ¿Í ´ÙÀ½ ¹®ÀÚ°¡ ´Ù¸£´Ù¸é
-            push(string[i]); //ÇØ´ç ¹®ÀÚ¸¦ push
-            push(count + '0'); //count °ª push (count¸¦ char·Î º¯È¯ÇÏ±â À§ÇØ 0À» ´õÇÑ´Ù)
-            count = 1;  //count ÃÊ±âÈ­
+        if (string[i] == string[i+1]) { //í˜„ì¬ ë¬¸ìì™€ ë‹¤ìŒ ë¬¸ìë¥¼ ë¹„êµ
+            count++;   //ê°™ë‹¤ë©´ count ì¦ê°€
+        } else {       //í˜„ì¬ ë¬¸ìì™€ ë‹¤ìŒ ë¬¸ìê°€ ë‹¤ë¥´ë‹¤ë©´
+            push(string[i]); //í•´ë‹¹ ë¬¸ìë¥¼ push
+            push(count + '0'); //count ê°’ push (countë¥¼ charë¡œ ë³€í™˜í•˜ê¸° ìœ„í•´ 0ì„ ë”í•œë‹¤)
+            count = 1;  //count ì´ˆê¸°í™”
         }
     }
-    char output[MAX_STACK_SIZE];    //ÀÌÇÏ´Â aaas¸¦ ÀÔ·Â½Ã¿¡
-    int i = 0;                      //s1a3ÀÌ Ãâ·ÂµÇÁö ¾Ê°í 3a1s°¡ Ãâ·ÂµÇµµ·Ï
-    while (!is_empty()) {           //¹è¿­À» »ı¼ºÇØ ½ºÅÃ ¹è¿­ÀÇ °ªÀ» ÀúÀå ÈÄ
-        output[i] = pop();          //¿ª¼øÀ¸·Î Ãâ·Â ÇØÁÖ´Â ÀåÄ¡ÀÌ´Ù.
+    char output[MAX_STACK_SIZE];    //ì´í•˜ëŠ” aaasë¥¼ ì…ë ¥ì‹œì—
+    int i = 0;                      //s1a3ì´ ì¶œë ¥ë˜ì§€ ì•Šê³  3a1sê°€ ì¶œë ¥ë˜ë„ë¡
+    while (!is_empty()) {           //ë°°ì—´ì„ ìƒì„±í•´ ìŠ¤íƒ ë°°ì—´ì˜ ê°’ì„ ì €ì¥ í›„
+        output[i] = pop();          //ì—­ìˆœìœ¼ë¡œ ì¶œë ¥ í•´ì£¼ëŠ” ì¥ì¹˜ì´ë‹¤.
         i++;
     }
     for (int j = i-1; j >= 0; j--) {
@@ -57,7 +57,7 @@ void compress(char* string) {
 
 int main() {
     char string[MAX_STACK_SIZE];
-    printf("ÅØ½ºÆ® ÀÔ·Â(¼Ò¹®ÀÚ ¿µ¾î¸¸): ");
+    printf("í…ìŠ¤íŠ¸ ì…ë ¥(ì†Œë¬¸ì ì˜ì–´ë§Œ): ");
     scanf("%s", string);
     compress(string);
     printf("\n");
