@@ -3,7 +3,7 @@
 #include <ctype.h>
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_SIZE 100
-typedef struct{
+typedef struct{ 
 	char stk[MAX_SIZE];
 	int top;
 }stack_type;
