@@ -2,32 +2,32 @@
 #include<stdlib.h>
 #define MAX_STACK_SIZE 100
 typedef int element;
-element stack[MAX_STACK_SIZE];
+element stack[MAX_STACK_SIZE]; 
 int top = -1;
 
-int is_empty() { //°ø¹é °ËÃâ
+int is_empty() { //ê³µë°± ê²€ì¶œ
     return (top == -1); 
 }
-int is_full() { //Æ÷È­ °ËÃâ
+int is_full() { //í¬í™” ê²€ì¶œ
     return (top == (MAX_STACK_SIZE - 1)); 
 }
-void push(element item) {  //»ğÀÔ
+void push(element item) {  //ì‚½ì…
     if (is_full()) {
-        fprintf(stderr, "½ºÅÃ Æ÷È­ ¿¡·¯\n");
+        fprintf(stderr, "ìŠ¤íƒ í¬í™” ì—ëŸ¬\n");
         return;
     }
     else stack[++top] = item;
 }
-element pop() { //»èÁ¦
+element pop() { //ì‚­ì œ
     if (is_empty()) {
-        fprintf(stderr, "½ºÅÃ °ø¹é ¿¡·¯\n");
+        fprintf(stderr, "ìŠ¤íƒ ê³µë°± ì—ëŸ¬\n");
         exit(1);
     }
     else return stack[top--];
 }
-element peek() { //top °üÂû
+element peek() { //top ê´€ì°°
     if (is_empty()) {
-        fprintf(stderr, "½ºÅÃ °ø¹é ¿¡·¯\n");
+        fprintf(stderr, "ìŠ¤íƒ ê³µë°± ì—ëŸ¬\n");
         exit(1);
     }
     else return stack[top];
@@ -38,16 +38,16 @@ int remove(int n) {
     int pre_last_num = -1;
     int last_num;
     while (n > 0) {
-        last_num = n % 10; //³ª¸ÓÁö¸¦ ÀúÀå
-        if (last_num != pre_last_num) { //³ª¸ÓÁö¿Í ÀÌÀü ³ª¸ÓÁö°¡ ¼­·Î ´Ù¸£´Ù¸é 
-            push(last_num);   // ÇöÀç ³ª¸ÓÁö¸¦ push
-            pre_last_num = last_num; // pushÇÑ ³ª¸ÓÁö Á¤º¸¸¦ ÀúÀå
+        last_num = n % 10; //ë‚˜ë¨¸ì§€ë¥¼ ì €ì¥
+        if (last_num != pre_last_num) { //ë‚˜ë¨¸ì§€ì™€ ì´ì „ ë‚˜ë¨¸ì§€ê°€ ì„œë¡œ ë‹¤ë¥´ë‹¤ë©´ 
+            push(last_num);   // í˜„ì¬ ë‚˜ë¨¸ì§€ë¥¼ push
+            pre_last_num = last_num; // pushí•œ ë‚˜ë¨¸ì§€ ì •ë³´ë¥¼ ì €ì¥
         }
-        n /= 10; //¼Ò¼öÁ¡Àº ¹ö·ÁÁø´Ù
+        n /= 10; //ì†Œìˆ˜ì ì€ ë²„ë ¤ì§„ë‹¤
     }
-                            // ½ºÅÃ¿¡¼­ ¿ª¼øÀ¸·Î ÀÚ¸®¼ö¸¦ °¡Á®¿Í¼­ °á°ú¸¦ °è»ê
-    while (!is_empty()) {   //½ºÅÃÀÌ ºñ¾îÀÖÁö ¾ÊÀ¸¸é
-        result = (result * 10) + pop(); //½ºÅÃ¿¡¼­ ¿ª¼øÀ¸·Î ÀÚ¸®¼ö¸¦ °¡Á®¿Â´Ù
+                            // ìŠ¤íƒì—ì„œ ì—­ìˆœìœ¼ë¡œ ìë¦¬ìˆ˜ë¥¼ ê°€ì ¸ì™€ì„œ ê²°ê³¼ë¥¼ ê³„ì‚°
+    while (!is_empty()) {   //ìŠ¤íƒì´ ë¹„ì–´ìˆì§€ ì•Šìœ¼ë©´
+        result = (result * 10) + pop(); //ìŠ¤íƒì—ì„œ ì—­ìˆœìœ¼ë¡œ ìë¦¬ìˆ˜ë¥¼ ê°€ì ¸ì˜¨ë‹¤
     }
 
     return result;
@@ -55,7 +55,7 @@ int remove(int n) {
 
 int main(void) {
     int input_num;
-    printf("¼ıÀÚ ÀÔ·Â: ");
+    printf("ìˆ«ì ì…ë ¥: ");
     scanf("%d", &input_num);
     printf("%d\n", remove(input_num));
     return 0;
