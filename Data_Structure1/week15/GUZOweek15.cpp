@@ -37,34 +37,38 @@ int peek(stack_type s) {
 	}
 	return (s).stk[(s).top];
 }
-
-int pie(char oper) {
-    if (oper == '(' || oper == '[' || oper == '{') {
-        return 3;
-    } 
-    else if (oper == '*' || oper == '/') {
-        return 2;
-    } 
-    else if (oper == '+' || oper == '-') {
-        return 1;
-    } 
-    else {
-        return 0;
+/*   스택 상태 확인 함수
+void stackprint(stack_type s) { 
+    printf(" 스택: ");
+    if (!is_empty(s)) {
+        for (int i=0; i<=s.top; i++)
+            printf("%c ", s.stk[i]);
     }
+    else 
+        printf("empty");
+    printf("\n");
 }
-int pis(char oper) {
-    if (oper == '(' || oper == '[' || oper == '{') {
-        return 0;
-    } 
-    else if (oper == '*' || oper == '/') {
+*/
+int pie(char oper) {
+    if (oper == '(' || oper == '[' || oper == '{') 
+        return 3;
+    else if (oper == '*' || oper == '/') 
         return 2;
-    } 
-    else if (oper == '+' || oper == '-') {
+    else if (oper == '+' || oper == '-') 
         return 1;
-    } 
-    else {
+    else 
+        return 0;
+}
+
+int pis(char oper) {
+    if (oper == '(' || oper == '[' || oper == '{') 
+        return 0;
+    else if (oper == '*' || oper == '/') 
+        return 2;
+    else if (oper == '+' || oper == '-') 
+        return 1;
+    else 
         return -1;
-    }
 }
 char* postfix(char exp[], char post[]) { //중위 -> 후위 함수
     int i = 0, j = 0;
@@ -74,14 +78,12 @@ char* postfix(char exp[], char post[]) { //중위 -> 후위 함수
     
     while ((ch = exp[i++]) != '\0') {
         if (ch == ' ') continue; //공백일 시 pass
-
-        if (ch == '(' || ch == '[' || ch == '{') 
-            stack_push(&s, ch);
+        
+        else if (ch == '(' || ch == '[' || ch == '{') stack_push(&s, ch);
         
         else if (ch == ')' || ch == ']' || ch == '}') {
-            while (!is_empty(s) && peek(s) != '(' && peek(s) != '[' && peek(s) != '{') {
+            while (!is_empty(s) && peek(s) != '(' && peek(s) != '[' && peek(s) != '{') 
                 post[j++] = stack_pop(&s);
-            }
             if (!is_empty(s) && ((ch == ')' && peek(s) == '(') || 
                                  (ch == ']' && peek(s) == '[') || 
                                  (ch == '}' && peek(s) == '{'))) {
@@ -97,11 +99,13 @@ char* postfix(char exp[], char post[]) { //중위 -> 후위 함수
         else { //ch가 숫자일 때 
             post[j++] = ch;
         }
+        //printf("ch: %c", ch);  스택, ch 상태 확인
+        //stackprint(s);
     }
-    while (!is_empty(s)) {
+    while (!is_empty(s)) 
         post[j++] = stack_pop(&s);
-    }
     post[j] = '\0';
+    
     return post;
 }
 
@@ -117,12 +121,11 @@ typedef struct TreeNode { //트리 노드
     struct TreeNode *left, *right;
 } TreeNode;
 
-#define SIZE 100
 int top = -1;
-TreeNode *stack[SIZE];
+TreeNode *stack[MAX_SIZE];
 
 void tree_push(TreeNode *p) {
-    if (top < SIZE -1) 
+    if (top < MAX_SIZE -1) 
         stack[++top] = p;
 }
 TreeNode *tree_pop() {
@@ -187,6 +190,6 @@ int main(void) {
     postfix(exp, post); //중위식 -> 후위식
     printf("후위: %s\n", post); 
     TreeNode *root = cons_exptree(post); //후위식 -> 트리
-    printf("계산 결과: %d \n", eval(root));
+    printf("계산 결과: %d \n\n", eval(root));
     return 0;
 }
