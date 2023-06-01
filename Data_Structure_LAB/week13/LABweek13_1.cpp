@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 void postorder(int t[], int i) {
-	if (i < 14 && t[i] != NULL) {
+	if (i < 15 && t[i] != 0) {
 		postorder(t, (i * 2));
 		postorder(t, (i * 2) + 1);
 		printf("[%d] ", t[i]);
@@ -11,49 +10,31 @@ void postorder(int t[], int i) {
 	
 }
 void inorder(int t[], int i) {
-	if (i < 14 && t[i] != NULL) {
+	if (i < 15 && t[i] != 0) {
 		inorder(t, (i * 2));
 		printf("[%d] ", t[i]);
 		inorder(t, (i * 2) + 1);
 	}
 }
-
 void preorder(int t[], int i) {
-	if (i < 14 && t[i] != NULL) {
+	if (i < 15 && t[i] != 0) {
 		printf("[%d] ", t[i]);
 		preorder(t, (i * 2));
 		preorder(t, (i * 2) + 1);
 	}
 }
 
-
-
-
 int main(void) {
-	int t[15];
-	for (int i = 0; i < 15; i++)
-		t[i] = NULL;
+	int t[15] = { 0, 1, 2, 3, 4, 5, 6, 0, 0, 7, 8, 0, 0, 9};
 	
-	t[1] = 1;
-	t[2] = 2;
-	t[3] = 3;
-	t[4] = 4;
-	t[5] = 5;
-	t[6] = 6;
-	t[9] = 7;
-	t[10] = 8;
-	t[13] = 9;
-	printf("전위: ");
-	preorder(t, 1);
-	printf("\n");
+	printf("트리 (배열)\n전위: ");
+	preorder(t, 1); printf("\n");
 
 	printf("중위: ");
-	inorder(t, 1);
-	printf("\n");
+	inorder(t, 1); printf("\n");
 
 	printf("후위: ");
-	postorder(t, 1);
-	printf("\n");
+	postorder(t, 1); printf("\n\n");
 
     return 0;
 }
