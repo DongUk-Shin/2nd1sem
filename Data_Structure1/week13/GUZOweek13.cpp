@@ -1,40 +1,80 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void postorder(int t[], int i) {
-	if (i < 15 && t[i] != 0) {
-		postorder(t, (i * 2));
-		postorder(t, (i * 2) + 1);
-		printf("[%d] ", t[i]);
-	}
-	
+typedef struct ListNode {
+    int data;
+    struct ListNode *link;
+} ListNode;
+typedef struct ListType {
+    int size;
+    ListNode *head;
+    ListNode *tail;
+} ListType;
+
+void print_list(ListType *list) {
+    for (ListNode *p = list->head; p != NULL; p = p->link) 
+        printf("%d ", p->data);
+    printf("\n");
 }
-void inorder(int t[], int i) {
-	if (i < 15 && t[i] != 0) {
-		inorder(t, (i * 2));
-		printf("[%d] ", t[i]);
-		inorder(t, (i * 2) + 1);
-	}
+
+void insert_last(ListType *list, int data) {
+    ListNode *new_node = (ListNode *)malloc(sizeof(ListNode));
+    new_node->data = data;
+    new_node->link = NULL;
+
+    if (list->head == NULL) {
+        list->head = new_node;
+        list->tail = new_node;
+    } else {
+        list->tail->link = new_node;
+        list->tail = new_node;
+    }
+    list->size++;
 }
-void preorder(int t[], int i) {
-	if (i < 15 && t[i] != 0) {
-		printf("[%d] ", t[i]);
-		preorder(t, (i * 2));
-		preorder(t, (i * 2) + 1);
-	}
+
+ListType* merge(ListType* list1, ListType* list2) {
+    ListType* merged_list = (ListType*)malloc(sizeof(ListType));
+    merged_list->size = list1->size + list2->size;
+    merged_list->head = NULL;
+    merged_list->tail = NULL;
+
+    ListNode* p1 = list1->head;
+    ListNode* p2 = list2->head;
+
+    while (p1 != NULL && p2 != NULL) {
+        if (p1->data < p2->data) {
+            insert_last(merged_list, p1->data);
+            p1 = p1->link;
+        } else {
+            insert_last(merged_list, p2->data);
+            p2 = p2->link;
+        }
+    }
+    while (p1 != NULL) {
+        insert_last(merged_list, p1->data);
+        p1 = p1->link;
+    }
+    while (p2 != NULL) {
+        insert_last(merged_list, p2->data);
+        p2 = p2->link;
+    }
+    return merged_list;
 }
+
 
 int main(void) {
-	int t[15] = { 0, 1, 2, 3, 4, 5, 6, 0, 0, 7, 8, 0, 0, 9};
-	
-	printf("트리 (배열)\n전위: ");
-	preorder(t, 1); printf("\n");
+    ListType list1 = {0, NULL, NULL};
+    ListType list2 = {0, NULL, NULL};
 
-	printf("중위: ");
-	inorder(t, 1); printf("\n");
+    for (int i = 3; i <= 30; i += 3) 
+        insert_last(&list1, i);
+    
+    for (int i = 0; i <= 45; i += 5) 
+        insert_last(&list2, i);
+    
+    print_list(&list1);
+    print_list(&list2);
 
-	printf("후위: ");
-	postorder(t, 1); printf("\n\n");
-
-    return 0;
+    ListType* merged_list = merge(&list1, &list2);
+    print_list(merged_list);
 }
