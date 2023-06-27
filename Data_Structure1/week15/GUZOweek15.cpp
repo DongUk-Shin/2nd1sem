@@ -1,4 +1,4 @@
-//ê³„ì‚°ê¸° ì…ë ¥(ì¤‘ìœ„) -> í›„ìœ„ -> íŠ¸ë¦¬ -> íŠ¸ë¦¬ì—°ì‚°
+//°è»ê±â ÀÔ·Â(ÁßÀ§) -> ÈÄÀ§ -> Æ®¸® -> Æ®¸®¿¬»ê
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -37,9 +37,9 @@ int peek(stack_type s) {
 	}
 	return (s).stk[(s).top];
 }
-/*   ìŠ¤íƒ ìƒíƒœ í™•ì¸ í•¨ìˆ˜
+/*   ½ºÅÃ »óÅÂ È®ÀÎ ÇÔ¼ö
 void stackprint(stack_type s) { 
-    printf(" ìŠ¤íƒ: ");
+    printf(" ½ºÅÃ: ");
     if (!is_empty(s)) {
         for (int i=0; i<=s.top; i++)
             printf("%c ", s.stk[i]);
@@ -70,14 +70,14 @@ int pis(char oper) {
     else 
         return -1;
 }
-char* postfix(char exp[], char post[]) { //ì¤‘ìœ„ -> í›„ìœ„ í•¨ìˆ˜
+char* postfix(char exp[], char post[]) { //ÁßÀ§ -> ÈÄÀ§ ÇÔ¼ö
     int i = 0, j = 0;
     char ch;
     stack_type s;
     init(&s);
     
     while ((ch = exp[i++]) != '\0') {
-        if (ch == ' ') continue; //ê³µë°±ì¼ ì‹œ pass
+        if (ch == ' ') continue; //°ø¹éÀÏ ½Ã pass
         
         else if (ch == '(' || ch == '[' || ch == '{') stack_push(&s, ch);
         
@@ -87,7 +87,7 @@ char* postfix(char exp[], char post[]) { //ì¤‘ìœ„ -> í›„ìœ„ í•¨ìˆ˜
             if (!is_empty(s) && ((ch == ')' && peek(s) == '(') || 
                                  (ch == ']' && peek(s) == '[') || 
                                  (ch == '}' && peek(s) == '{'))) {
-                stack_pop(&s); // ì™¼ìª½ ê´„í˜¸ ì œê±°
+                stack_pop(&s); // ¿ŞÂÊ °ıÈ£ Á¦°Å
             }
         }
         else if (ch == '+' || ch == '-' || ch == '*' || ch == '/' ) {
@@ -96,10 +96,10 @@ char* postfix(char exp[], char post[]) { //ì¤‘ìœ„ -> í›„ìœ„ í•¨ìˆ˜
             }
             stack_push(&s, ch);
         }
-        else { //chê°€ ìˆ«ìì¼ ë•Œ 
+        else { //ch°¡ ¼ıÀÚÀÏ ¶§ 
             post[j++] = ch;
         }
-        //printf("ch: %c", ch);  ìŠ¤íƒ, ch ìƒíƒœ í™•ì¸
+        //printf("ch: %c", ch);  ½ºÅÃ, ch »óÅÂ È®ÀÎ
         //stackprint(s);
     }
     while (!is_empty(s)) 
@@ -109,14 +109,14 @@ char* postfix(char exp[], char post[]) { //ì¤‘ìœ„ -> í›„ìœ„ í•¨ìˆ˜
     return post;
 }
 
-char* get_exp(char exp[]) { //ìˆ˜ì‹ ì…ë ¥ í•¨ìˆ˜
-    printf("ìˆ˜ì‹ì„ ì…ë ¥í•˜ì„¸ìš”: ");
+char* get_exp(char exp[]) { //¼ö½Ä ÀÔ·Â ÇÔ¼ö
+    printf("¼ö½ÄÀ» ÀÔ·ÂÇÏ¼¼¿ä: ");
     scanf("%[^\n]", exp);
     return exp;
 }
 /*-------------------------*/
 
-typedef struct TreeNode { //íŠ¸ë¦¬ ë…¸ë“œ
+typedef struct TreeNode { //Æ®¸® ³ëµå
     int data;
     struct TreeNode *left, *right;
 } TreeNode;
@@ -135,7 +135,7 @@ TreeNode *tree_pop() {
     return p;
 }
 
-int eval_oper(int opnd1, int opnd2, char oper) { //ì—°ì‚°ì ê³„ì‚°
+int eval_oper(int opnd1, int opnd2, char oper) { //¿¬»êÀÚ °è»ê
     switch (oper) {
     case '+':
         return opnd1 + opnd2;
@@ -148,28 +148,28 @@ int eval_oper(int opnd1, int opnd2, char oper) { //ì—°ì‚°ì ê³„ì‚°
     }
 }
 
-int eval(TreeNode *root) { //ë…¸ë“œ ë‘ê°œ ì—°ì‚° (ì „ìœ„)
+int eval(TreeNode *root) { //³ëµå µÎ°³ ¿¬»ê (ÀüÀ§)
     if (root == NULL) 
         return 0;
     if (root->left == NULL && root->right == NULL) 
-        return root->data; //ë‹¨ë§ ë…¸ë“œì¸ê°€(ì •ìˆ˜ì¸ê°€)
+        return root->data; //´Ü¸» ³ëµåÀÎ°¡(Á¤¼öÀÎ°¡)
     int leftopnd = eval(root->left);
     int rightopnd = eval(root->right);
-    printf("ë…¸ë“œ ì—°ì‚°: %d %c %d \n", leftopnd, root->data, rightopnd);
+    printf("³ëµå ¿¬»ê: %d %c %d \n", leftopnd, root->data, rightopnd);
     return eval_oper(leftopnd, rightopnd, root->data);
 }
 
-TreeNode* cons_exptree(char post[]) { //í›„ìœ„ -> íŠ¸ë¦¬
+TreeNode* cons_exptree(char post[]) { //ÈÄÀ§ -> Æ®¸®
     int i = 0;
     char ch;
-    printf("ë…¸ë“œ: ");
+    printf("³ëµå: ");
     while ((ch = post[i++]) != '\0') {
         TreeNode *newNode = (TreeNode*)malloc(sizeof(TreeNode));
         newNode->data = ch;
         newNode->left = newNode->right = NULL;
         printf("[%c] ", ch);
-        if (isdigit(ch)) {
-            int num = ch - '0'; // ìˆ«ì ë¬¸ìë¥¼ ì •ìˆ˜ë¡œ ë³€í™˜
+        if (isdigit(ch)) { // Á¤¼öÀÌ¸é
+            int num = ch - '0'; // ¼ıÀÚ ¹®ÀÚ¸¦ Á¤¼ö·Î º¯È¯
             newNode->data = num;
             tree_push(newNode);
 
@@ -186,10 +186,10 @@ TreeNode* cons_exptree(char post[]) { //í›„ìœ„ -> íŠ¸ë¦¬
 int main(void) {
     char exp[MAX_SIZE];
     char post[MAX_SIZE];
-    get_exp(exp); //ìˆ˜ì‹ ì…ë ¥
-    postfix(exp, post); //ì¤‘ìœ„ì‹ -> í›„ìœ„ì‹
-    printf("í›„ìœ„: %s\n", post); 
-    TreeNode *root = cons_exptree(post); //í›„ìœ„ì‹ -> íŠ¸ë¦¬
-    printf("ê³„ì‚° ê²°ê³¼: %d \n\n", eval(root));
+    get_exp(exp); //¼ö½Ä ÀÔ·Â
+    postfix(exp, post); //ÁßÀ§½Ä -> ÈÄÀ§½Ä
+    printf("ÈÄÀ§: %s\n", post); 
+    TreeNode *root = cons_exptree(post); //ÈÄÀ§½Ä -> Æ®¸®
+    printf("°è»ê °á°ú: %d \n\n", eval(root));
     return 0;
 }

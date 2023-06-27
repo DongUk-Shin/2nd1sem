@@ -1,4 +1,4 @@
-//ë£¨íŠ¸ë¶€í„° ì ë…¸ë“œê¹Œì§€, ê° ê²½ë¡œìƒì˜ í•©ì˜ ìµœëŒ“ê°’
+//·çÆ®ºÎÅÍ ÀÙ ³ëµå±îÁö, °¢ °æ·Î»óÀÇ ÇÕÀÇ ÃÖ´ñ°ª
 #include<stdio.h>
 #include<stdlib.h>
 #define TRUE 1
@@ -18,16 +18,8 @@ TreeNode* make_node(int data) {
 	return p;
 }
 
-void pretorder(TreeNode* root) {
-    if (root != NULL) {
-        printf("[%d] ", root->data);
-        pretorder(root->left);
-        pretorder(root->right);
-    }
-}
-
 TreeNode *cons_list(int t[], int i) {
-	if (i < 16 && t[i] != 0) { //15ê¹Œì§€
+	if (i < 16 && t[i] != 0) { //15±îÁö
 		TreeNode* root = (TreeNode *)malloc(sizeof(TreeNode));
 		root = make_node(t[i]);
 
@@ -50,18 +42,32 @@ int sum_root2leaf(TreeNode* root, int sum) {
 
     int leftSum = sum_root2leaf(root->left, sum);
     int rightSum = sum_root2leaf(root->right, sum);
-    return (leftSum > rightSum) ? leftSum : rightSum;  //ìµœëŒ“ê°’
+    return (leftSum > rightSum) ? leftSum : rightSum;  //ÃÖ´ñ°ª
+}
+
+int findNodesWithOneChild(TreeNode *root) {
+    if (root == NULL)
+        return 0;
+    
+    if ((root->left == NULL && root->right != NULL) || (root->left != NULL && root->right == NULL)) {
+        // ÀÚ½Ä ³ëµå°¡ ÇÏ³ªÀÎ °æ¿ì
+        printf("[%d] ", root->data);  // ¶Ç´Â ¿øÇÏ´Â ÀÛ¾÷ ¼öÇà
+		return 1;
+    }
+    
+    int count = findNodesWithOneChild(root->left) + findNodesWithOneChild(root->right);
+	return count;
 }
 
 int main(void) {
-	
-    int t[] = {0, 1, 2, 3, 8, 4, 5, 6, 0, 0, 10, 0, 7, 9, 0, 5}; //í¬ê¸° 15
+    int t[] = {0, 1, 2, 3, 8, 4, 5, 6, 0, 0, 10, 0, 7, 9, 0, 5}; //Å©±â 15
     TreeNode * root = NULL;
     root= cons_list(t, 1);
-    pretorder(root);
 	printf("\n");
 
     int maxSum = sum_root2leaf(root, 0);
-    printf("ë£¨íŠ¸ë¶€í„° ì ë…¸ë“œê¹Œì§€, ê° ê²½ë¡œìƒì˜ í•©ì˜ ìµœëŒ“ê°’: %d\n", maxSum);
+    printf("·çÆ®ºÎÅÍ ÀÙ ³ëµå±îÁö, °¢ °æ·Î»óÀÇ ÇÕÀÇ ÃÖ´ñ°ª\n%d\n", maxSum);
+
+	printf("%d", findNodesWithOneChild(root));
 	return 0;
 }

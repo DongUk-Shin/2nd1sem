@@ -1,4 +1,4 @@
-//ìŠ¤ë ˆë“œ ì´ì§„ íŠ¸ë¦¬ ì¤‘ìœ„ ìˆœíšŒ
+//½º·¹µå ÀÌÁø Æ®¸® ÁßÀ§ ¼øÈ¸
 #include<stdio.h>
 #include<stdlib.h>
 #define TRUE 1
@@ -21,7 +21,7 @@ TreeNode* make_node(int data, int is_thread) {
 }
 
 TreeNode* find_successor(TreeNode* q) {
-    TreeNode* node = q->right; //ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™
+    TreeNode* node = q->right; //¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
     if (node == NULL || q->is_thread == TRUE)
         return node; 
     while (node->left != NULL) 
@@ -35,8 +35,30 @@ void thread_inorder(TreeNode* t) {
 	while (q->left) q = q->left;
 	do {
 		printf("[%d] -> ", q->data);
-		q = find_successor(q);//ë‹¤ìŒ ë…¸ë“œë¥¼ ì°¾ëŠ”ë‹¤
+		q = find_successor(q);//´ÙÀ½ ³ëµå¸¦ Ã£´Â´Ù
 	} while (q != NULL);
+}
+
+
+void thread_preorder(TreeNode* t) {
+    TreeNode* q = t;
+    while (q != NULL) {
+        printf("[%d] -> ", q->data);
+
+        // ¿ŞÂÊ ÀÚ½ÄÀÌ ÀÖ´Â °æ¿ì ¿ŞÂÊ ÀÚ½ÄÀ¸·Î ÀÌµ¿
+        if (q->left != NULL) {
+            q = q->left;
+        }
+        // ¿ŞÂÊ ÀÚ½ÄÀÌ ¾ø´Â °æ¿ì ½º·¹µå Æ÷ÀÎÅÍ¸¦ µû¶ó ÀÌµ¿
+        else {
+            q = q->right;
+
+            // ¿À¸¥ÂÊ ÀÚ½ÄÀÌ NULLÀÌ°Å³ª ½º·¹µåÀÎ °æ¿ì±îÁö °Ç³Ê¶Ù±â
+            while (q != NULL && (q->right == NULL || q->is_thread)) {
+                q = q->right;
+            }
+        }
+    }
 }
 
 TreeNode* cons_thread_tree() {
@@ -67,9 +89,8 @@ TreeNode* cons_thread_tree() {
 }
 
 int main(void) {
-	
 	TreeNode * root = cons_thread_tree();
-    printf("ìŠ¤ë ˆë“œ ë…¸ë“œ ì¤‘ìœ„ìˆœíšŒ: ");
+    printf("½º·¹µå ³ëµå ÁßÀ§¼øÈ¸ \n");
 	thread_inorder(root);
 	printf("\n");
 

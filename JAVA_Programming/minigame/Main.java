@@ -1,9 +1,9 @@
 import java.util.*; 
 
-public class Main {      //ë©”ì¸ class
+public class Main {      //¸ŞÀÎ class
 	public static void main(String[] args) {
 		
-		char[][] map = { //2ì°¨ì› ë°°ì—´ ìƒì„±
+		char[][] map = { //2Â÷¿ø ¹è¿­ »ı¼º
 		{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 		{'.','@','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 		{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
@@ -15,35 +15,36 @@ public class Main {      //ë©”ì¸ class
 		{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
 		{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'} };
 		
-		MapCreate mapcreate = new MapCreate(map);      //ì°¸ì¡° ë³€ìˆ˜ ì„ ì–¸ ê°ì²´ ìƒì„±
-		Scanner sc = new Scanner(System.in);
-		Monster monster = new Monster(map);
-		GoldandExp goldandexp = new GoldandExp(map);
-		
-		System.out.println("ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš” : ");	//ì‚¬ìš©ìì—ê²Œ ì´ë¦„ì„ ì…ë ¥ ë°›ëŠ”ë‹¤
-		String nameinput = (sc.nextLine());		
-		Me me = new Me(1, 1, map, nameinput);	//ì…ë ¥ë°›ì€ ë¬¸ìì—´ì„ í´ë˜ìŠ¤ì˜ ìƒì„±ìë¡œ ì „ë‹¬í•œë‹¤
-		
-		monster.MonsterCreate(4, 7);   //4, 7ì— 'M' ìƒì„±
-		goldandexp.GoldCreate();       //ëœë¤í•œ ìœ„ì¹˜ì— 'G' ìƒì„±
-		mapcreate.draw(map);   		   //ì§€ë„ë¥¼ ê·¸ë¦°ë‹¤
-		
-		
-		boolean result = true;		 //ë¶€ìš¸ ë³€ìˆ˜ ì„ ì–¸
-		while(result) {				//resultë©´ ê³„ì† ë°˜ë³µ
+		MapCreate mapcreate = new MapCreate(map);      //ÂüÁ¶ º¯¼ö ¼±¾ğ °´Ã¼ »ı¼º
+		try (Scanner sc = new Scanner(System.in)) {
+			Monster monster = new Monster(map);
+			GoldandExp goldandexp = new GoldandExp(map);
 			
-			me.nameprint(); //ì´ë¦„ ì¶œë ¥
+			System.out.println("ÀÌ¸§ ÀÔ·Â : ");	//»ç¿ëÀÚ¿¡°Ô ÀÌ¸§À» ÀÔ·Â ¹Ş´Â´Ù
+			String nameinput = (sc.nextLine());		
+			Me me = new Me(1, 1, map, nameinput);	//ÀÔ·Â¹ŞÀº ¹®ÀÚ¿­À» Å¬·¡½ºÀÇ »ı¼ºÀÚ·Î Àü´ŞÇÑ´Ù
+			
+			monster.MonsterCreate(4, 7);   //4, 7¿¡ 'M' »ı¼º
+			goldandexp.GoldCreate();       //·£´ıÇÑ À§Ä¡¿¡ 'G' »ı¼º
+			mapcreate.draw(map);   		   //Áöµµ¸¦ ±×¸°´Ù
 			
 			
-			
-			goldandexp.GoldCheck();
-			goldandexp.ExpLevelPrint();
-			me.Memove(sc.next()); //wasd ì…ë ¥í•˜ë©´ x y ì¡°ì ˆ 
-			monster.MonsterMove();
-			result = monster.MonsterCheck();   //monster.MonsterCheck();ì˜ ê°’ì´ falseë©´ whileì„ íƒˆì¶œí•œë‹¤
-			mapcreate.draw(map); 
-			
+			boolean result = true;		 //ºÎ¿ï º¯¼ö ¼±¾ğ
+			while(result) {				//result¸é °è¼Ó ¹İº¹
+				
+				me.nameprint(); //ÀÌ¸§ Ãâ·Â
+				
+				
+				
+				goldandexp.GoldCheck();
+				goldandexp.ExpLevelPrint();
+				me.Memove(sc.next()); //wasd ÀÔ·ÂÇÏ¸é x y Á¶Àı 
+				monster.MonsterMove();
+				result = monster.MonsterCheck();   //monster.MonsterCheck();ÀÇ °ªÀÌ false¸é whileÀ» Å»ÃâÇÑ´Ù
+				mapcreate.draw(map); 
+				
+			}
 		}
-		System.out.println("Game Over!");	//ë°˜ë³µë¬¸ íƒˆì¶œ í›„ ê²Œì„ ì¢…ë£Œ ë¬¸êµ¬ ì¶œë ¥
+		System.out.println("Game Over!");	//¹İº¹¹® Å»Ãâ ÈÄ °ÔÀÓ Á¾·á ¹®±¸ Ãâ·Â
 	}
 }

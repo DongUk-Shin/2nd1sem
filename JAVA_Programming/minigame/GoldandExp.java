@@ -1,39 +1,39 @@
-import java.util.*; 
+
 
 class GoldandExp {
-	int goldx, goldy; //ê³¨ë“œì˜ x,y ê°’ ë³€ìˆ˜
-	int exp = 0;      //ê²½í—˜ì¹˜ ì´ˆê¸°í™”
-	int level = 1;    //ë ˆë²¨ ì´ˆê¸°í™”
-	int random0to9, random0to19; //ëœë¤ ê°’ ì €ì¥ì„ ìœ„í•œ ë³€ìˆ˜ ì„ ì–¸
-	int CumulEXP;     //ëˆ„ì  ê²½í—˜ì¹˜ ë³€ìˆ˜ 
-	char map [][];    //mainì—ì„œ ì „ë‹¬ë°›ì„ ë°°ì—´ ì„ ì–¸
+	int goldx, goldy; //°ñµåÀÇ x,y °ª º¯¼ö
+	int exp = 0;      //°æÇèÄ¡ ÃÊ±âÈ­
+	int level = 1;    //·¹º§ ÃÊ±âÈ­
+	int random0to9, random0to19; //·£´ı °ª ÀúÀåÀ» À§ÇÑ º¯¼ö ¼±¾ğ
+	int CumulEXP;     //´©Àû °æÇèÄ¡ º¯¼ö 
+	char map [][];    //main¿¡¼­ Àü´Ş¹ŞÀ» ¹è¿­ ¼±¾ğ
 	
-	public GoldandExp(char map[][]) { //ìƒì„±ì, this.ë¥¼ ì´ìš©í•´   
-		this.map = map;	}			  //Mainì—ì„œ ë°°ì—´ì„ ì „ë‹¬ ë°›ëŠ”ë‹¤
+	public GoldandExp(char map[][]) { //»ı¼ºÀÚ, this.¸¦ ÀÌ¿ëÇØ   
+		this.map = map;	}			  //Main¿¡¼­ ¹è¿­À» Àü´Ş ¹Ş´Â´Ù
 		
 	
-	public void GoldCreate() {        //ê³¨ë“œ ìƒì„± ë©”ì†Œë“œ
+	public void GoldCreate() {        //°ñµå »ı¼º ¸Ş¼Òµå
 		random0to9 = (int)(Math.random() * 9);  
 		random0to19 = (int)(Math.random() * 19);
-		goldx = random0to9;     //0~9, 0~19ì˜ ì •ìˆ˜ë¥¼ ìƒì„±í•˜ì—¬
-		goldy = random0to19;    //ë°°ì—´ì˜ ëœë¤í•œ ìœ„ì¹˜ì— Gë¥¼ ëŒ€ì…í•œë‹¤
+		goldx = random0to9;     //0~9, 0~19ÀÇ Á¤¼ö¸¦ »ı¼ºÇÏ¿©
+		goldy = random0to19;    //¹è¿­ÀÇ ·£´ıÇÑ À§Ä¡¿¡ G¸¦ ´ëÀÔÇÑ´Ù
 		map [goldx][goldy] = 'G'; }
 		
-	public void ExpLevelPrint() { //exp, level, ëˆ„ì expë¥¼ ì¶œë ¥í•˜ëŠ” ë©”ì†Œë“œ
-		System.out.println("ë‹¤ìŒ ë ˆë²¨ê¹Œì§€ " + 
-				        (2-exp) + " ë‚¨ì•˜ìŠµë‹ˆë‹¤");
-		System.out.println("í˜„ì¬ ë ˆë²¨ " + level + 
-				        " / ëˆ„ì  ê²½í—˜ì¹˜ " + CumulEXP);	}
+	public void ExpLevelPrint() { //exp, level, ´©Àûexp¸¦ Ãâ·ÂÇÏ´Â ¸Ş¼Òµå
+		System.out.println("´ÙÀ½ ·¹º§±îÁö " + 
+				        (2-exp) + " ³²¾Ò½À´Ï´Ù");
+		System.out.println("ÇöÀç ·¹º§ " + level + 
+				        " / ´©Àû °æÇèÄ¡ " + CumulEXP);	}
 	
-	public void GoldCheck() { //Gê°€ ë‹¿ì•˜ëŠ”ì§€ íŒë³„í•˜ëŠ” ë©”ì†Œë“œ
-		if (map [goldx][goldy] == '@') { //@ì™€ Gì˜ ìœ„ì¹˜ê°€ ë™ì¼í•˜ë©´
-			exp++;				//ê²½í—˜ì¹˜ ì¦ê°€
-			CumulEXP++; 		//ëˆ„ì  ê²½í—˜ì¹˜ ì¦ê°€
-			if (exp == 2) {     //ë§Œì•½ ê²½í—˜ì¹˜ê°€ 2ì— ë„ë‹¬í•˜ë©´
-				exp = 0;		//ê²½í—˜ì¹˜ 0ìœ¼ë¡œ ì´ˆê¸°í™”
-				level++; }		//ë ˆë²¨ 1 ì¦ê°€
-			GoldCreate(); }		//ê³¨ë“œ ìƒì„± ë©”ì†Œë“œ í˜¸ì¶œ
-		if (map [goldx][goldy] == 'M') { //@ì™€ Mì˜ ìœ„ì¹˜ê°€ ë™ì¼í•˜ë©´
-			GoldCreate(); }		//ê³¨ë“œ ìƒì„± ë©”ì†Œë“œ í˜¸ì¶œ
+	public void GoldCheck() { //G°¡ ´ê¾Ò´ÂÁö ÆÇº°ÇÏ´Â ¸Ş¼Òµå
+		if (map [goldx][goldy] == '@') { //@¿Í GÀÇ À§Ä¡°¡ µ¿ÀÏÇÏ¸é
+			exp++;				//°æÇèÄ¡ Áõ°¡
+			CumulEXP++; 		//´©Àû °æÇèÄ¡ Áõ°¡
+			if (exp == 2) {     //¸¸¾à °æÇèÄ¡°¡ 2¿¡ µµ´ŞÇÏ¸é
+				exp = 0;		//°æÇèÄ¡ 0À¸·Î ÃÊ±âÈ­
+				level++; }		//·¹º§ 1 Áõ°¡
+			GoldCreate(); }		//°ñµå »ı¼º ¸Ş¼Òµå È£Ãâ
+		if (map [goldx][goldy] == 'M') { //@¿Í MÀÇ À§Ä¡°¡ µ¿ÀÏÇÏ¸é
+			GoldCreate(); }		//°ñµå »ı¼º ¸Ş¼Òµå È£Ãâ
 	}
 }

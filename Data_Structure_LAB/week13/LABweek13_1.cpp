@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 void postorder(int t[], int i) {
-	if (i < 15 && t[i] != 0) {
+	if (t[i] != 0) {
 		postorder(t, (i * 2));
 		postorder(t, (i * 2) + 1);
 		printf("[%d] ", t[i]);
@@ -10,14 +10,14 @@ void postorder(int t[], int i) {
 	
 }
 void inorder(int t[], int i) {
-	if (i < 15 && t[i] != 0) {
+	if (t[i] != 0) {
 		inorder(t, (i * 2));
 		printf("[%d] ", t[i]);
 		inorder(t, (i * 2) + 1);
 	}
 }
 void preorder(int t[], int i) {
-	if (i < 15 && t[i] != 0) {
+	if (t[i] != 0) {
 		printf("[%d] ", t[i]);
 		preorder(t, (i * 2));
 		preorder(t, (i * 2) + 1);
@@ -25,15 +25,16 @@ void preorder(int t[], int i) {
 }
 
 int main(void) {
-	int t[15] = { 0, 1, 2, 3, 4, 5, 6, 0, 0, 7, 8, 0, 0, 9};
+	int t[32] = {0, 1, 2, 3, 4, 5, 6, 0, 0, 7, 8, 0, 0, 9, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	
-	printf("íŠ¸ë¦¬ (ë°°ì—´)\nì „ìœ„: ");
+	printf("Æ®¸® (¹è¿­)\nÀüÀ§: ");
 	preorder(t, 1); printf("\n");
 
-	printf("ì¤‘ìœ„: ");
+	printf("ÁßÀ§: ");
 	inorder(t, 1); printf("\n");
 
-	printf("í›„ìœ„: ");
+	printf("ÈÄÀ§: ");
 	postorder(t, 1); printf("\n\n");
 
     return 0;

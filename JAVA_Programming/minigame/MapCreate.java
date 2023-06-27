@@ -1,13 +1,12 @@
-import java.util.*; 
 
-class MapCreate {  //í™”ë©´ì— ì§€ë„ë¥¼ ê·¸ë¦¬ëŠ” ë©”ì†Œë“œ
-	char map [][]; //mainì—ì„œ ì „ë‹¬ë°›ì„ ë°°ì—´ ì„ ì–¸
+class MapCreate {  //È­¸é¿¡ Áöµµ¸¦ ±×¸®´Â ¸Ş¼Òµå
+	char map [][]; //main¿¡¼­ Àü´Ş¹ŞÀ» ¹è¿­ ¼±¾ğ
 	
-	public MapCreate(char map [][]) {  //ìƒì„±ì, this.ë¥¼ ì´ìš©í•´  
-		this.map = map; }              //Mainì—ì„œ ë°°ì—´ì„ ì „ë‹¬ ë°›ëŠ”ë‹¤
+	public MapCreate(char map [][]) {  //»ı¼ºÀÚ, this.¸¦ ÀÌ¿ëÇØ  
+		this.map = map; }              //Main¿¡¼­ ¹è¿­À» Àü´Ş ¹Ş´Â´Ù
 	
-	public void draw(char map[][]) {   //í™”ë©´ì— 10x20 í¬ê¸°ì˜
-		for (int i=0; i<10; i++) {	   //ì§€ë„(2ì°¨ì›ë°°ì—´)ì„ ì¶œë ¥í•œë‹¤
+	public void draw(char map[][]) {   //È­¸é¿¡ 10x20 Å©±âÀÇ
+		for (int i=0; i<10; i++) {	   //Áöµµ(2Â÷¿ø¹è¿­)À» Ãâ·ÂÇÑ´Ù
 			for (int j=0; j<20; j++) {
 				System.out.print(map[i][j]);	}
 			System.out.print("\n");		}

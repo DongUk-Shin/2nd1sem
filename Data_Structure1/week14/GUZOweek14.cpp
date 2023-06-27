@@ -1,4 +1,4 @@
-//ì „ìœ„ - ìˆœí™˜
+//? „?œ„ - ?ˆœ?™˜
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -11,26 +11,63 @@ typedef struct TreeNode {
 int top = -1;
 TreeNode *stack[SIZE];
 
+int is_empty() {
+    return top == -1;
+}
+
+int is_full() {
+    return top == SIZE - 1;
+}
+
 void push(TreeNode *p) {
-    if (top < SIZE -1) 
+    if (!is_full()) 
         stack[++top] = p;
 }
 
+
 TreeNode *pop() {
     TreeNode *p = NULL;
-    if (top >= 0) 
+    if (!is_empty())
         p = stack[top--];
     return p;
 }
 
+TreeNode* peek() {
+    TreeNode* p = NULL;
+    if (!is_empty())
+        p = stack[top];
+    return p;
+}
+
+
+
 void preorder_iter(TreeNode *root) { 
     push(root);
-    while (top >= 0) {
+    while (!is_empty()) {
         TreeNode *node = pop();
-        if (node) {
+        if (node != NULL) {
             printf("[%c] ", node->data);
             push(node->right);
             push(node->left);
+        }
+    }
+}
+
+void postorder_iter(TreeNode* root) {
+    TreeNode* prev = NULL;
+    while (!is_empty() || root != NULL) {
+        if (root != NULL) {
+            push(root);
+            root = root->left;
+        } else {
+            TreeNode* node = peek();
+            if (node->right == NULL || node->right == prev) {
+                printf("[%c] ", node->data);
+                prev = node;
+                pop();
+            } else {
+                root = node->right;
+            }
         }
     }
 }
@@ -48,7 +85,13 @@ TreeNode n9 = {'A', &n8, &n4};
 TreeNode *root = &n9;
 
 int main(void) {
-    printf("ì „ìœ„: ");
+    printf("ÈÄÀ§: ");
+    postorder_iter(root);
+    printf("\nÈÄÀ§: ");
+    postorder_iter(root);
+    printf("\nÈÄÀ§: ");
+    postorder_iter(root);
+    printf("\nÀüÀ§: ");
     preorder_iter(root);
     printf("\n");
     return 0;

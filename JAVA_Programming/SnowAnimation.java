@@ -23,11 +23,10 @@ public class SnowAnimation extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        JPanel buttonPanel = new JPanel();
         ImageIcon background1 = new ImageIcon("background.png");
         backgroundImage = background1.getImage();
         panel = new MyPanel();
-        add(panel);
+        
 
         addButton = new JButton("Add Snow");
         panel.add(addButton);
@@ -54,7 +53,7 @@ public class SnowAnimation extends JFrame {
             panel.repaint();
         });
         timer.start();
-        
+        add(panel);
         createSnowflakes();
         pack();
         setLocationRelativeTo(null);
@@ -71,7 +70,7 @@ public class SnowAnimation extends JFrame {
     }
 
     private class MyPanel extends JPanel {
-    	
+        
         public MyPanel() {
             setPreferredSize(new Dimension(WIDTH, HEIGHT));
         }
@@ -123,6 +122,6 @@ public class SnowAnimation extends JFrame {
     }
 
     public static void main(String[] args) {
-        SnowAnimation animation = new SnowAnimation();
+        new SnowAnimation();
     }
 }

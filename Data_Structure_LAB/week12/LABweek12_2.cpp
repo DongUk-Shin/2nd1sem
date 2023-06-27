@@ -62,7 +62,7 @@ void printQueue(LinkedQueueType* q) {
 
 
 	QueueNode* p = q->rear->link;
-	printf("í: ");
+	printf("?: ");
 
 	do {
 		printf("%d ", p->data);

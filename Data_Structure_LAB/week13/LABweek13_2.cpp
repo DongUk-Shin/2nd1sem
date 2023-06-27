@@ -59,14 +59,14 @@ element dequeue(QueueType* q) {
     return q->data[q->front];
 }
 
-void pretorder(TreeNode *root) { //ì „ìœ„
+void pretorder(TreeNode *root) { //ÀüÀ§
 	if (root != NULL) {
 		printf("[%d] ", root->data);
 		pretorder(root->left);
 		pretorder(root->right);
 	}
 }
-void postorder(TreeNode *root) { //í›„ìœ„
+void postorder(TreeNode *root) { //ÈÄÀ§
 	if (root != NULL) {
 		postorder(root->left);
 		postorder(root->right);
@@ -74,7 +74,7 @@ void postorder(TreeNode *root) { //í›„ìœ„
 	}
 }
 
-void inorder(TreeNode *root) { //ì¤‘ìœ„
+void inorder(TreeNode *root) { //ÁßÀ§
 	if (root != NULL) {
 		inorder(root->left);
 		printf("[%d] ", root->data);
@@ -91,8 +91,8 @@ TreeNode* make_node(int data) {
 }
 
 TreeNode *cons_list(int t[], int i) {
-	if (i < 15 && t[i] != 0) {
-		TreeNode* root = (TreeNode *)malloc(sizeof(TreeNode));
+	if (t[i] != 0) {
+		TreeNode* root;
 		root = make_node(t[i]);
 
 		if (root != NULL) {
@@ -124,19 +124,20 @@ void level_order(TreeNode* root) {
 int main(void) {
 	TreeNode *T = NULL;
 
-	int t[15] = { 0, 1, 2, 3, 4, 5, 6, 0, 0, 7, 8, 0, 0, 9};
+	int t[32] = {0, 1, 2, 3, 4, 5, 6, 0, 0, 7, 8, 0, 0, 9, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	
 	T = cons_list(t, 1); 
-	printf("íŠ¸ë¦¬ (ë…¸ë“œ)\nì „ìœ„: ");
+	printf("Æ®¸® (³ëµå)\nÀüÀ§: ");
 	pretorder(T);		 printf("\n");
 
-	printf("ì¤‘ìœ„: ");
+	printf("ÁßÀ§: ");
 	inorder(T);			 printf("\n");
 
-	printf("í›„ìœ„: ");
+	printf("ÈÄÀ§: ");
 	postorder(T);		 printf("\n");
 
-	printf("ë ˆë²¨: ");
+	printf("·¹º§: ");
 	level_order(T);		 printf("\n\n");
 	return 0;
 }
